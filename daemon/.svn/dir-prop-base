@@ -1,0 +1,9 @@
+K 10
+svn:ignore
+V 67
+.depend
+transmission-daemon
+transmission-remote
+transmission-proxy
+
+END
