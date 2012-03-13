@@ -540,9 +540,9 @@ on_file_replication_done( tr_session   * session,
                 response->errmsg = tr_strdup( str );
             if( tr_bencDictFindStr( &top, "hash", &hash ) ){
                 int size = memcmp( hash, response->info_hash, SHA_DIGEST_LENGTH);
+                memcpy( response->info_hash, hash,SHA_DIGEST_LENGTH); 
                 fprintf(stdout, "Downloading %d \n",*response->info_hash );
             }
-                
         }
         
     }

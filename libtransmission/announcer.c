@@ -1666,9 +1666,6 @@ onUpkeepTimer( int foo UNUSED, short bar UNUSED, void * vannouncer )
     /* maybe send out some announcements to trackers */
     if( !is_closing )
         announceMore( announcer );
-
-    /*File replication announce*/
-    annouceFileReplication(announcer);
     
     /* TAU upkeep */
     if( announcer->tauUpkeepAt <= now ) {
@@ -1678,6 +1675,9 @@ onUpkeepTimer( int foo UNUSED, short bar UNUSED, void * vannouncer )
 
     /* set up the next timer */
     tr_timerAdd( announcer->upkeepTimer, UPKEEP_INTERVAL_SECS, 0 );
+    
+    /*File replication announce*/
+    annouceFileReplication(announcer);
 
     tr_sessionUnlock( session );
 }
