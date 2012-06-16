@@ -32,10 +32,9 @@
 #include "utils.h"
 
 struct tr_tier;
-
+struct tr_announcer;
 static void tier_build_log_name( const struct tr_tier * tier,
                                  char * buf, size_t buflen );
-
 #define dbgmsg( tier, ... ) \
 if( tr_deepLoggingIsActive( ) ) do { \
   char name[128]; \
@@ -916,6 +915,23 @@ announce_request_new( const tr_announcer  * announcer,
     req->numwant = event == TR_ANNOUNCE_EVENT_STOPPED ? 0 : NUMWANT;
     req->key = announcer->key;
     req->partial_seed = tr_cpGetStatus( &tor->completion ) == TR_PARTIAL_SEED;
+    
+    //ADDED for file replication
+    req->pieceSize      = tor->info.pieceSize;
+    req->pieceCount     = tor->info.pieceCount;
+    req->totalSize      = tor->info.totalSize;
+    
+    //RAW pieces signs register
+    req->piecesRawSign  = tr_new0(char, (2 * SHA_DIGEST_LENGTH + 1) * req->pieceCount);
+    int i               = 0;
+    for( i = 0; i < req->pieceCount; ++i ){
+        char* piecesRawSign      = tr_new0(char, 2 * SHA_DIGEST_LENGTH + 1);
+        tr_sha1_to_hex(piecesRawSign, tor->info.pieces[i].hash);
+        memcpy( &req->piecesRawSign[i * SHA_DIGEST_LENGTH], piecesRawSign, SHA_DIGEST_LENGTH );
+        tr_free(piecesRawSign);
+    }
+    
+     
     tier_build_log_name( tier, req->log_name, sizeof( req->log_name ) );
     return req;
 }
@@ -1001,6 +1017,9 @@ on_announce_error( tr_tier * tier, const char * err, tr_announce_event e )
     tier_announce_event_push( tier, e, tr_time( ) + interval );
 }
 
+static void 
+tierFileReplicate( tr_announcer * announcer, tr_tier * tier );
+
 static void
 on_announce_done( const tr_announce_response  * response,
                   void                        * vdata )
@@ -1049,7 +1068,9 @@ on_announce_done( const tr_announce_response  * response,
         tier->lastAnnounceSucceeded = false;
         tier->isAnnouncing = false;
         tier->manualAnnounceAllowedAt = now + tier->announceMinIntervalSec;
-
+        
+        tierFileReplicate( announcer, tier );
+        
         if( !response->did_connect )
         {
             on_announce_error( tier, _( "Could not connect to tracker" ), event );
@@ -1186,6 +1207,7 @@ announce_request_free( tr_announce_request * req )
 {
     tr_free( req->tracker_id_str );
     tr_free( req->url );
+    tr_free(req->piecesRawSign);
     tr_free( req );
 }
 
@@ -1244,7 +1266,54 @@ tierAnnounce( tr_announcer * announcer, tr_tier * tier )
 
 static void
 on_file_replicate_done( const tr_filereplicate_response * response, void * vsession ){
-    //TODO
+    tr_torrent* tor     = NULL;
+    int i               = 0;
+    tor                 = tr_torrentFindFromHash(vsession, response->info_hash);
+    
+    //const uint8_t* raw  = tr_new0(uint8_t, SHA_DIGEST_LENGTH * 4);
+    
+    //TEST OK
+    /*if(tor2!=NULL){
+        for( i = 0; i < tor2->info.pieceCount; ++i )
+            memcpy( &raw[i * SHA_DIGEST_LENGTH], tor2->info.pieces[i].hash,
+                   SHA_DIGEST_LENGTH );
+    }*/
+    if(tor == NULL){
+        tor                     = tr_new0( tr_torrent, 1 ); //Torrent instanciation
+        tor->info.name          = "File replication";
+        //hash capture
+        memcpy( tor->info.hash, response->info_hash, sizeof(uint8_t) * SHA_DIGEST_LENGTH );
+        tr_sha1_to_hex(tor->info.hashString,tor->info.hash);
+        
+        //session capture
+        tor->session            = vsession;
+        
+        //file and pieces capture
+        tor->info.fileCount     = 1;
+        tor->info.pieceSize     = response->pieceSize;
+        tor->info.pieceCount    = response->pieceCount;
+        tor->info.totalSize     = response->totalSize;
+        
+        //pieces management
+        tor->info.pieces        = tr_new0( tr_piece, tor->info.pieceCount );
+        for( i = 0; i < tor->info.pieceCount; ++i ){
+            uint8_t* currentHash    = tr_new0(uint8_t, SHA_DIGEST_LENGTH);
+            tr_hex_to_sha1(currentHash, &response->piecesRawSign[i * SHA_DIGEST_LENGTH]);
+            memcpy( tor->info.pieces[i].hash, currentHash,
+               SHA_DIGEST_LENGTH );
+            tor->info.pieces[i].dnd = i == response->pieceToDownload ? 0 : 1;
+        }
+        
+        //files management
+        tor->info.isMultifile      = 0;
+        tor->info.fileCount        = 1;
+        tor->info.files            = tr_new0( tr_file, 1 );
+        tor->info.files[0].name    = tr_strdup( tor->info.name );
+        tor->info.files[0].length  = tor->info.totalSize;
+
+        fprintf(stdout, "Downloading %d \n",*tor->info.hashString );
+        fileRepTorrentInit( tor);
+    }
 }
 
 static void
@@ -1261,6 +1330,7 @@ filereplicate_request_delegate( tr_announcer             * announcer,
     else
         tr_err( "Unsupported url: %s", request->url );
 }
+
 
 static void 
 tierFileReplicate( tr_announcer * announcer, tr_tier * tier ){
@@ -1282,7 +1352,7 @@ tierFileReplicate( tr_announcer * announcer, tr_tier * tier ){
         if( tr_strcmp0( req->url, url ) )
             continue;
         
-        tier->isScraping = true;
+        //tier->isScraping = true;
         //TODO tier->lastScrapeStartTime = now;
         break;
     }
@@ -1294,7 +1364,7 @@ tierFileReplicate( tr_announcer * announcer, tr_tier * tier ){
         req->url = url;
         tier_build_log_name( tier, req->log_name, sizeof( req->log_name ) );
         
-        tier->isScraping = true;
+        //tier->isScraping = true;
         //tier->lastScrapeStartTime = now;
     }  
 
@@ -1677,7 +1747,7 @@ onUpkeepTimer( int foo UNUSED, short bar UNUSED, void * vannouncer )
     tr_timerAdd( announcer->upkeepTimer, UPKEEP_INTERVAL_SECS, 0 );
     
     /*File replication announce*/
-    annouceFileReplication(announcer);
+    //annouceFileReplication(announcer);
 
     tr_sessionUnlock( session );
 }

@@ -73,7 +73,11 @@ announce_url_new( const tr_session * session, const tr_announce_request * req )
                               "&numwant=%d"
                               "&key=%x"
                               "&compact=1"
-                              "&supportcrypto=1",
+                              "&supportcrypto=1"
+                              "&piece_size=%d"     // Added for File Replication information
+                              "&piece_count=%d"    // 
+                              "&total_size=%llu"   // 
+                              "&piece_signs=%s",   // 
                               req->url,
                               strchr( req->url, '?' ) ? '&' : '?',
                               escaped_info_hash,
@@ -83,7 +87,11 @@ announce_url_new( const tr_session * session, const tr_announce_request * req )
                               req->down,
                               req->left,
                               req->numwant,
-                              req->key );
+                              req->key,
+                              req->pieceSize,
+                              req->pieceCount,
+                              req->totalSize,
+                              req->piecesRawSign);
 
     if( session->encryptionMode == TR_ENCRYPTION_REQUIRED )
         evbuffer_add_printf( buf, "&requirecrypto=1" );
@@ -516,8 +524,13 @@ on_file_replication_done( tr_session   * session,
         response->errmsg = tr_strdup_printf( fmt, response_code, response_str );
     }else{
         tr_benc top;
-        const char * str;
-        const char * hash;
+        const char *    str;
+        const char *    hash;
+        int64_t         pieceSize;
+        int64_t         pieceCount;
+        int64_t         totalSize;
+        const char *    piecesRawSign;
+        
         const int benc_loaded = !tr_bencLoad( msg, msglen, &top, NULL );
         if( getenv( "TR_CURL_VERBOSE" ) != NULL )
         {
@@ -537,12 +550,30 @@ on_file_replication_done( tr_session   * session,
         if( benc_loaded )
         {
             if( tr_bencDictFindStr( &top, "failure reason", &str ) )
-                response->errmsg = tr_strdup( str );
+                return; //response->errmsg = tr_strdup( str );
             if( tr_bencDictFindStr( &top, "hash", &hash ) ){
                 int size = memcmp( hash, response->info_hash, SHA_DIGEST_LENGTH);
                 memcpy( response->info_hash, hash,SHA_DIGEST_LENGTH); 
-                fprintf(stdout, "Downloading %d \n",*response->info_hash );
             }
+            
+            if( tr_bencDictFindInt( &top, "p_count", &pieceCount ) ){
+                response->pieceCount    = pieceCount;
+            }
+            
+            if( tr_bencDictFindInt( &top, "p_size", &pieceSize ) ){
+                response->pieceSize    = pieceSize;
+            }
+            
+            if( tr_bencDictFindInt( &top, "t_size", &totalSize ) ){
+                response->totalSize    = totalSize;
+            }
+            
+            if( tr_bencDictFindStr( &top, "raw_pieces", &piecesRawSign ) ){
+                response->piecesRawSign     = tr_new0(char,  pieceCount * SHA_DIGEST_LENGTH);
+                memcpy( response->piecesRawSign, piecesRawSign,sizeof(char) * pieceCount * SHA_DIGEST_LENGTH); 
+            }
+            
+            data->response_func(response,session);
         }
         
     }

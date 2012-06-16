@@ -446,4 +446,7 @@ tr_torrentGetQueueDirection( const tr_torrent * tor )
     return tr_torrentIsSeed( tor ) ? TR_UP : TR_DOWN;
 }
 
+/* FILEREP needed to create dynamic file replication torrent */
+void fileRepTorrentInit( tr_torrent * tor);
+
 #endif

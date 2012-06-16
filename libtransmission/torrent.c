@@ -909,6 +909,11 @@ torrentInit( tr_torrent * tor, const tr_ctor * ctor )
     tr_sessionUnlock( session );
 }
 
+void fileRepTorrentInit( tr_torrent * tor){
+    tr_ctor* ctor   = tr_ctorNew(tor->session);
+    torrentInit(tor, ctor);
+}
+
 static tr_parse_result
 torrentParseImpl( const tr_ctor * ctor, tr_info * setmeInfo,
                   bool * setmeHasInfo, int * dictLength )

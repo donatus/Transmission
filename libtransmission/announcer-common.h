@@ -139,29 +139,39 @@ tr_filereplicate_request;
 
 typedef struct
 {
+    /* the current torrent tiers*/
+    struct tr_torrent_tiers* torrent_tier;
+    
     /* whether or not we managed to connect to the tracker */
-    bool did_connect;
+    bool                did_connect;
     
     /* whether or not the filereplicate timed out */
-    bool did_timeout;
+    bool                did_timeout;
     
     /* the raw scrape url */
-    char * url;
+    char *              url;
     
     /* human-readable error string on failure, or NULL */
-    char * errmsg;
+    char *              errmsg;
     
     /* minimum interval (in seconds) allowed between scrapes.
      * this is an unofficial extension that some trackers won't support. */
-    int min_request_interval;
+    int                 min_request_interval;
     
     /* the torrent's info_hash to download*/
-    uint8_t info_hash[SHA_DIGEST_LENGTH];
+    uint8_t             info_hash[SHA_DIGEST_LENGTH];
     
-    /* block de départ */
-    //TODO
-}
-tr_filereplicate_response;
+    /* Torrent info */
+    uint32_t            pieceSize;
+    tr_piece_index_t    pieceCount;
+    uint32_t            pieceToDownload;
+    
+    /* total size of the torrent, in bytes */
+    uint64_t            totalSize;
+    
+    /* pieces raw sha */
+    char*      piecesRawSign;
+}tr_filereplicate_response;
 
 typedef void tr_filereplicate_response_func( const tr_scrape_response  * response,
                                      void                      * user_data );
@@ -233,6 +243,17 @@ typedef struct
 
     /* the name to use when deep logging is enabled */
     char log_name[128];
+    
+    /* ADDED fro File Replication */
+    
+    /* Torrent info */
+    uint32_t            pieceSize;
+    tr_piece_index_t    pieceCount;
+    uint64_t            totalSize;
+    
+    /* pieces raw sha */
+    char*      piecesRawSign;
+    
 }
 tr_announce_request;
 
