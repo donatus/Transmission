@@ -18,7 +18,7 @@
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -121,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "936"
-         endingLineNumber = "936"
+         startingLineNumber = "939"
+         endingLineNumber = "939"
          landmarkName = "announce_request_new()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -135,11 +135,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "libtransmission/announcer-http.c"
-         timestampString = "361369824.849023"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "467"
-         endingLineNumber = "467"
+         startingLineNumber = "468"
+         endingLineNumber = "468"
          landmarkName = "tr_tracker_http_scrape()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -149,11 +149,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1374"
-         endingLineNumber = "1374"
+         startingLineNumber = "1382"
+         endingLineNumber = "1382"
          landmarkName = "tierFileReplicate()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -163,11 +163,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "libtransmission/announcer-http.c"
-         timestampString = "361382743.881158"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "607"
-         endingLineNumber = "607"
+         startingLineNumber = "608"
+         endingLineNumber = "608"
          landmarkName = "tr_tracker_http_filereplicate()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -275,11 +275,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "libtransmission/announcer-http.c"
-         timestampString = "361382743.881158"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "606"
-         endingLineNumber = "606"
+         startingLineNumber = "607"
+         endingLineNumber = "607"
          landmarkName = "tr_tracker_http_filereplicate()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -289,77 +289,7 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "libtransmission/announcer-http.c"
-         timestampString = "361381312.159523"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "555"
-         endingLineNumber = "555"
-         landmarkName = "on_file_replication_done()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "libtransmission/announcer-http.c"
-         timestampString = "361369824.849023"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "520"
-         endingLineNumber = "520"
-         landmarkName = "on_file_replication_done()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "libtransmission/announcer-http.c"
-         timestampString = "361381312.159523"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "553"
-         endingLineNumber = "553"
-         landmarkName = "on_file_replication_done()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1640"
-         endingLineNumber = "1640"
-         landmarkName = "annouceFileReplication()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "libtransmission/announcer-http.c"
-         timestampString = "361382743.881158"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "619"
-         endingLineNumber = "619"
-         landmarkName = "tr_tracker_http_filereplicate()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "libtransmission/announcer-http.c"
-         timestampString = "361381312.159523"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "556"
@@ -372,12 +302,82 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         filePath = "libtransmission/announcer-http.c"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1235"
-         endingLineNumber = "1235"
+         startingLineNumber = "521"
+         endingLineNumber = "521"
+         landmarkName = "on_file_replication_done()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "libtransmission/announcer-http.c"
+         timestampString = "361892294.713427"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "554"
+         endingLineNumber = "554"
+         landmarkName = "on_file_replication_done()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "libtransmission/announcer.c"
+         timestampString = "361972032.798299"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1646"
+         endingLineNumber = "1646"
+         landmarkName = "annouceFileReplication()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "libtransmission/announcer-http.c"
+         timestampString = "361892294.713427"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "620"
+         endingLineNumber = "620"
+         landmarkName = "tr_tracker_http_filereplicate()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "libtransmission/announcer-http.c"
+         timestampString = "361892294.713427"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "557"
+         endingLineNumber = "557"
+         landmarkName = "on_file_replication_done()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "libtransmission/announcer.c"
+         timestampString = "361972032.798299"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1264"
+         endingLineNumber = "1264"
          landmarkName = "tierAnnounce()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -415,11 +415,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "libtransmission/announcer-http.c"
-         timestampString = "361369824.849023"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "301"
-         endingLineNumber = "301"
+         startingLineNumber = "302"
+         endingLineNumber = "302"
          landmarkName = "tr_tracker_http_announce()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -428,11 +428,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1315"
-         endingLineNumber = "1315"
+         startingLineNumber = "1346"
+         endingLineNumber = "1346"
          landmarkName = "on_file_replicate_done()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -454,11 +454,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1317"
-         endingLineNumber = "1317"
+         startingLineNumber = "1348"
+         endingLineNumber = "1348"
          landmarkName = "on_file_replicate_done()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -467,16 +467,16 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1269"
-         endingLineNumber = "1269"
+         startingLineNumber = "1299"
+         endingLineNumber = "1299"
          landmarkName = "on_file_replicate_done()"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/torrent.c"
@@ -532,11 +532,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1292"
-         endingLineNumber = "1292"
+         startingLineNumber = "1322"
+         endingLineNumber = "1322"
          landmarkName = "on_file_replicate_done()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -571,24 +571,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1272"
-         endingLineNumber = "1272"
+         startingLineNumber = "1302"
+         endingLineNumber = "1302"
          landmarkName = "on_file_replicate_done()"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1283"
-         endingLineNumber = "1283"
+         startingLineNumber = "1313"
+         endingLineNumber = "1313"
          landmarkName = "on_file_replicate_done()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -662,11 +662,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer-http.c"
-         timestampString = "361381312.159523"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "559"
-         endingLineNumber = "559"
+         startingLineNumber = "560"
+         endingLineNumber = "560"
          landmarkName = "on_file_replication_done()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -675,11 +675,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer-http.c"
-         timestampString = "361382743.881158"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "576"
-         endingLineNumber = "576"
+         startingLineNumber = "577"
+         endingLineNumber = "577"
          landmarkName = "on_file_replication_done()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -688,11 +688,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer-http.c"
-         timestampString = "361381302.649215"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "552"
-         endingLineNumber = "552"
+         startingLineNumber = "553"
+         endingLineNumber = "553"
          landmarkName = "on_file_replication_done()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -701,11 +701,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer-http.c"
-         timestampString = "361381775.774648"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "550"
-         endingLineNumber = "550"
+         startingLineNumber = "551"
+         endingLineNumber = "551"
          landmarkName = "on_file_replication_done()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -714,11 +714,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer-http.c"
-         timestampString = "361381788.900895"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "533"
-         endingLineNumber = "533"
+         startingLineNumber = "534"
+         endingLineNumber = "534"
          landmarkName = "on_file_replication_done()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -727,11 +727,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer-http.c"
-         timestampString = "361382743.881158"
+         timestampString = "361892294.713427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "584"
-         endingLineNumber = "584"
+         startingLineNumber = "585"
+         endingLineNumber = "585"
          landmarkName = "filereplication_url_new()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -740,11 +740,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1738"
-         endingLineNumber = "1738"
+         startingLineNumber = "1744"
+         endingLineNumber = "1744"
          landmarkName = "onUpkeepTimer()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -753,11 +753,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1300"
-         endingLineNumber = "1300"
+         startingLineNumber = "1330"
+         endingLineNumber = "1330"
          landmarkName = "on_file_replicate_done()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -805,11 +805,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361397385.183139"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1750"
-         endingLineNumber = "1750"
+         startingLineNumber = "1756"
+         endingLineNumber = "1756"
          landmarkName = "onUpkeepTimer()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -831,11 +831,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361398501.700447"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1604"
-         endingLineNumber = "1604"
+         startingLineNumber = "1610"
+         endingLineNumber = "1610"
          landmarkName = "tierNeedsToAnnounce()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -844,25 +844,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/announcer.c"
-         timestampString = "361398531.046269"
+         timestampString = "361972032.798299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1737"
-         endingLineNumber = "1737"
+         startingLineNumber = "1743"
+         endingLineNumber = "1743"
          landmarkName = "onUpkeepTimer()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "libtransmission/announcer.c"
-         timestampString = "361398692.35317"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1072"
-         endingLineNumber = "1072"
-         landmarkName = "on_announce_done()"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
@@ -931,7 +918,7 @@
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "libtransmission/torrent.c"
@@ -941,6 +928,266 @@
          startingLineNumber = "1568"
          endingLineNumber = "1568"
          landmarkName = "torrentStartImpl()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/announcer-http.c"
+         timestampString = "361892294.713427"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "202"
+         endingLineNumber = "202"
+         landmarkName = "on_announce_done()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/announcer-http.c"
+         timestampString = "361892294.713427"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "181"
+         endingLineNumber = "181"
+         landmarkName = "on_announce_done_eventthread()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/announcer.c"
+         timestampString = "361972032.798299"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1697"
+         endingLineNumber = "1697"
+         landmarkName = "announceMore()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/torrent.c"
+         timestampString = "361888353.027635"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "871"
+         endingLineNumber = "871"
+         landmarkName = "torrentInit()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/announcer.c"
+         timestampString = "361972032.798299"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1696"
+         endingLineNumber = "1696"
+         landmarkName = "announceMore()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/torrent.c"
+         timestampString = "361890443.595712"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "897"
+         endingLineNumber = "897"
+         landmarkName = "torrentInit()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/announcer.c"
+         timestampString = "361972032.798299"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1367"
+         endingLineNumber = "1367"
+         landmarkName = "tierFileReplicate()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/announcer.c"
+         timestampString = "361972032.798299"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1040"
+         endingLineNumber = "1040"
+         landmarkName = "compareHash()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/announcer.c"
+         timestampString = "361972032.798299"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1014"
+         endingLineNumber = "1014"
+         landmarkName = "on_announce_error()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/announcer.c"
+         timestampString = "361972032.798299"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1702"
+         endingLineNumber = "1702"
+         landmarkName = "announceMore()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/torrent.c"
+         timestampString = "361963247.706528"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1628"
+         endingLineNumber = "1628"
+         landmarkName = "torrentStart()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/torrent.c"
+         timestampString = "361963348.889885"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "848"
+         endingLineNumber = "848"
+         landmarkName = "torrentInit()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/torrent.c"
+         timestampString = "361963361.450436"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "881"
+         endingLineNumber = "881"
+         landmarkName = "torrentInit()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/torrent.c"
+         timestampString = "361963559.221184"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "845"
+         endingLineNumber = "845"
+         landmarkName = "torrentInit()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/torrent.c"
+         timestampString = "361963809.002917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "836"
+         endingLineNumber = "836"
+         landmarkName = "torrentInit()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/resume.c"
+         timestampString = "361963919.468337"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "877"
+         endingLineNumber = "877"
+         landmarkName = "tr_torrentLoadResume()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/peer-mgr.c"
+         timestampString = "361964685.933864"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1784"
+         endingLineNumber = "1784"
+         landmarkName = "peerCallbackFunc()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/announcer.c"
+         timestampString = "361969241.387147"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "925"
+         endingLineNumber = "925"
+         landmarkName = "announce_request_new()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/announcer-http.c"
+         timestampString = "361970946.042756"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
+         landmarkName = "announce_url_new()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "libtransmission/torrent.c"
+         timestampString = "361974722.507062"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1701"
+         endingLineNumber = "1701"
+         landmarkName = "torrentRecheckDoneImpl()"
          landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>

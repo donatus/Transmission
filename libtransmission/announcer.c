@@ -652,8 +652,8 @@ addTorrentToTier( tr_torrent_tiers * tt, tr_torrent * tor )
                                                tor->info.trackerCount, &n );
 
     /* build the array of trackers */
-    tt->trackers = tr_new0( tr_tracker, n );
-    tt->tracker_count = n;
+    tt->trackers        = tr_new0( tr_tracker, n );
+    tt->tracker_count   = n;
     for( i=0; i<n; ++i )
         trackerConstruct( &tt->trackers[i], &infos[i] );
 
@@ -922,16 +922,19 @@ announce_request_new( const tr_announcer  * announcer,
     req->totalSize      = tor->info.totalSize;
     
     //RAW pieces signs register
-    req->piecesRawSign  = tr_new0(char, (2 * SHA_DIGEST_LENGTH + 1) * req->pieceCount);
+    req->piecesRawSign  = tr_new0(char, ((2 * SHA_DIGEST_LENGTH) * req->pieceCount) +1);
     int i               = 0;
     for( i = 0; i < req->pieceCount; ++i ){
-        char* piecesRawSign      = tr_new0(char, 2 * SHA_DIGEST_LENGTH + 1);
+        char* piecesRawSign      = tr_new0(char, 2 * SHA_DIGEST_LENGTH);
         tr_sha1_to_hex(piecesRawSign, tor->info.pieces[i].hash);
-        memcpy( &req->piecesRawSign[i * SHA_DIGEST_LENGTH], piecesRawSign, SHA_DIGEST_LENGTH );
+        memcpy( &req->piecesRawSign[i * (2 * SHA_DIGEST_LENGTH)], piecesRawSign, 2 * SHA_DIGEST_LENGTH);
         tr_free(piecesRawSign);
     }
     
-     
+    char* last = req->piecesRawSign;
+    last       += ((2 * SHA_DIGEST_LENGTH) * req->pieceCount) +1;
+    *last       =  '\0';
+    
     tier_build_log_name( tier, req->log_name, sizeof( req->log_name ) );
     return req;
 }
@@ -993,6 +996,18 @@ struct announce_data
     bool isRunningOnSuccess;
 };
 
+struct announce_replication_data{
+    int tierId;
+    time_t timeSent;
+    tr_announce_event event;
+    tr_session * session;
+    tr_tracker_info * trackers;
+    int trackerCount;
+    
+    /** If the request succeeds, the value for tier's "isRunning" flag */
+    bool isRunningOnSuccess;
+};
+
 static void
 on_announce_error( tr_tier * tier, const char * err, tr_announce_event e )
 {
@@ -1018,7 +1033,19 @@ on_announce_error( tr_tier * tier, const char * err, tr_announce_event e )
 }
 
 static void 
-tierFileReplicate( tr_announcer * announcer, tr_tier * tier );
+tierFileReplicate( tr_announcer * announcer, tr_tier * tier);
+
+
+static bool compareHash(uint8_t hash_source[],uint8_t hash_target[]){
+    bool result = true;
+    
+    for(int i=0; i<SHA_DIGEST_LENGTH; i++){
+        if(hash_source[i] != hash_target[i]){
+            return false;
+        }
+    }
+    return result;
+}
 
 static void
 on_announce_done( const tr_announce_response  * response,
@@ -1068,8 +1095,6 @@ on_announce_done( const tr_announce_response  * response,
         tier->lastAnnounceSucceeded = false;
         tier->isAnnouncing = false;
         tier->manualAnnounceAllowedAt = now + tier->announceMinIntervalSec;
-        
-        tierFileReplicate( announcer, tier );
         
         if( !response->did_connect )
         {
@@ -1197,6 +1222,8 @@ on_announce_done( const tr_announce_response  * response,
                 tier_announce_event_push( tier, TR_ANNOUNCE_EVENT_NONE, now + i );
             }
         }
+        
+        tierFileReplicate( announcer, tier);
     }
 
     tr_free( data );
@@ -1265,10 +1292,11 @@ tierAnnounce( tr_announcer * announcer, tr_tier * tier )
  ***/
 
 static void
-on_file_replicate_done( const tr_filereplicate_response * response, void * vsession ){
+on_file_replicate_done( const tr_filereplicate_response * response, void * vdata ){
+    struct announce_replication_data * data = vdata;
     tr_torrent* tor     = NULL;
     int i               = 0;
-    tor                 = tr_torrentFindFromHash(vsession, response->info_hash);
+    tor                 = tr_torrentFindFromHash(data->session, response->info_hash);
     
     //const uint8_t* raw  = tr_new0(uint8_t, SHA_DIGEST_LENGTH * 4);
     
@@ -1281,13 +1309,13 @@ on_file_replicate_done( const tr_filereplicate_response * response, void * vsess
     if(tor == NULL){
         tor                     = tr_new0( tr_torrent, 1 ); //Torrent instanciation
         tor->info.name          = "File replication";
+        tor->isRunning          = true; //TE
         //hash capture
         memcpy( tor->info.hash, response->info_hash, sizeof(uint8_t) * SHA_DIGEST_LENGTH );
         tr_sha1_to_hex(tor->info.hashString,tor->info.hash);
         
         //session capture
-        tor->session            = vsession;
-        
+        tor->session            = data->session;
         //file and pieces capture
         tor->info.fileCount     = 1;
         tor->info.pieceSize     = response->pieceSize;
@@ -1303,7 +1331,8 @@ on_file_replicate_done( const tr_filereplicate_response * response, void * vsess
                SHA_DIGEST_LENGTH );
             tor->info.pieces[i].dnd = i == response->pieceToDownload ? 0 : 1;
         }
-        
+        tor->info.trackers         = data->trackers;
+        tor->info.trackerCount     = data->trackerCount;
         //files management
         tor->info.isMultifile      = 0;
         tor->info.fileCount        = 1;
@@ -1312,7 +1341,7 @@ on_file_replicate_done( const tr_filereplicate_response * response, void * vsess
         tor->info.files[0].length  = tor->info.totalSize;
 
         fprintf(stdout, "Downloading %d \n",*tor->info.hashString );
-        fileRepTorrentInit( tor);
+        fileRepTorrentInit(tor);
     }
 }
 
@@ -1333,52 +1362,27 @@ filereplicate_request_delegate( tr_announcer             * announcer,
 
 
 static void 
-tierFileReplicate( tr_announcer * announcer, tr_tier * tier ){
+tierFileReplicate( tr_announcer * announcer, tr_tier * tier){
     //request declaration and creation
-    const int max_request_count         = MIN( announcer->slotsAvailable, 1 );
-    tr_filereplicate_request * requests = tr_new0( tr_filereplicate_request, max_request_count ); //TODO check number request 
-    int request_count = 0;
-    int j,i;
+    tr_filereplicate_request * request = tr_new0( tr_filereplicate_request, 1 ); //TODO check number request 
     char * url = tier->currentTracker->file_replication;
-    //NO NEED const uint8_t * hash = tier->tor->info.hash;
+    struct announce_replication_data * data;
     
-    /* if there's a request with this scrape URL and a free slot, use it */
-    for( j=0; j<request_count; ++j )
-    {
-        tr_filereplicate_request * req = &requests[j];
-        
-        /*if( req->info_hash_count >= TR_FILEREPLICATION_REQUEST_MAX )
-            continue;*/
-        if( tr_strcmp0( req->url, url ) )
-            continue;
-        
-        //tier->isScraping = true;
-        //TODO tier->lastScrapeStartTime = now;
-        break;
+    request->url = url;
+    tier_build_log_name( tier, request->log_name, sizeof( request->log_name ) );
+    
+    
+    data = tr_new0( struct announce_replication_data, 1 );
+    data->session       = announcer->session;
+    data->tierId        = tier->key;
+    data->trackers      = tier->tor->info.trackers;
+    data->trackerCount  = tier->tor->info.trackerCount;
+    if(request->url != 0){
+        filereplicate_request_delegate( announcer, request, on_file_replicate_done, data );
     }
-    
-    /* otherwise, if there's room for another request, build a new one */
-    if( ( j==request_count ) && ( request_count < max_request_count ) )
-    {
-        tr_filereplicate_request * req = &requests[request_count++];
-        req->url = url;
-        tier_build_log_name( tier, req->log_name, sizeof( req->log_name ) );
-        
-        //tier->isScraping = true;
-        //tier->lastScrapeStartTime = now;
-    }  
 
-    
-    /* send the requests we just built */
-    for( i=0; i<request_count; ++i ){
-        if(requests[i].url != 0){
-            filereplicate_request_delegate( announcer, &requests[i], on_file_replicate_done, announcer->session );
-        }
-    }
-        
-    
     /* cleanup */
-    tr_free( requests );
+    tr_free( request );
     
 }
 

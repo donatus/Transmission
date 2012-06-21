@@ -172,6 +172,7 @@ struct announce_data
     char log_name[128];
 };
 
+
 static void
 on_announce_done_eventthread( void * vdata )
 {
@@ -512,7 +513,7 @@ on_file_replication_done( tr_session   * session,
     tr_filereplicate_response * response;
     struct filereplication_data * data = vdata;
     
-    response = &data->response;
+    response = &data->response; //HERE
     response->did_connect = did_connect;
     response->did_timeout = did_timeout;
     dbgmsg( data->log_name, "Got file replication response for \"%s\"", response->url );
@@ -569,11 +570,11 @@ on_file_replication_done( tr_session   * session,
             }
             
             if( tr_bencDictFindStr( &top, "raw_pieces", &piecesRawSign ) ){
-                response->piecesRawSign     = tr_new0(char,  pieceCount * SHA_DIGEST_LENGTH);
-                memcpy( response->piecesRawSign, piecesRawSign,sizeof(char) * pieceCount * SHA_DIGEST_LENGTH); 
+                response->piecesRawSign     = tr_new0(char,  pieceCount * 2 *SHA_DIGEST_LENGTH);
+                memcpy( response->piecesRawSign, piecesRawSign,sizeof(char) * 2 * pieceCount * SHA_DIGEST_LENGTH); 
             }
             
-            data->response_func(response,session);
+            data->response_func(response,data->response_func_user_data);
         }
         
     }
