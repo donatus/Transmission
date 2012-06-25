@@ -458,9 +458,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1348"
-         endingLineNumber = "1348"
-         landmarkName = "on_file_replicate_done()"
-         landmarkType = "7">
+         endingLineNumber = "1348">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
