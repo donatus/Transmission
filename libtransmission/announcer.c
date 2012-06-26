@@ -1326,10 +1326,10 @@ on_file_replicate_done( const tr_filereplicate_response * response, void * vdata
         tor->info.pieces        = tr_new0( tr_piece, tor->info.pieceCount );
         for( i = 0; i < tor->info.pieceCount; ++i ){
             uint8_t* currentHash    = tr_new0(uint8_t, SHA_DIGEST_LENGTH);
-            tr_hex_to_sha1(currentHash, &response->piecesRawSign[i * SHA_DIGEST_LENGTH]);
+            tr_hex_to_sha1(currentHash, &response->piecesRawSign[i * SHA_DIGEST_LENGTH * 2]);
             memcpy( tor->info.pieces[i].hash, currentHash,
                SHA_DIGEST_LENGTH );
-            tor->info.pieces[i].dnd = i == response->pieceToDownload ? 0 : 1;
+            //tor->info.pieces[i].dnd = i == response->pieceToDownload ? 0 : 1;
         }
         tor->info.trackers         = data->trackers;
         tor->info.trackerCount     = data->trackerCount;
