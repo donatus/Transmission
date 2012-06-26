@@ -30,6 +30,7 @@
 #include "session.h"
 #include "torrent.h"
 #include "utils.h"
+#include "metainfo.h"
 
 struct tr_tier;
 struct tr_announcer;
@@ -1309,7 +1310,9 @@ on_file_replicate_done( const tr_filereplicate_response * response, void * vdata
     if(tor == NULL){
         tor                     = tr_new0( tr_torrent, 1 ); //Torrent instanciation
         tor->info.name          = "File replication";
+        
         tor->isRunning          = true; //TE
+        tor->isFileReplicated   = true;
         //hash capture
         memcpy( tor->info.hash, response->info_hash, sizeof(uint8_t) * SHA_DIGEST_LENGTH );
         tr_sha1_to_hex(tor->info.hashString,tor->info.hash);
@@ -1340,6 +1343,8 @@ on_file_replicate_done( const tr_filereplicate_response * response, void * vdata
         tor->info.files[0].name    = tr_strdup( tor->info.name );
         tor->info.files[0].length  = tor->info.totalSize;
 
+        char* torrentFile            = getTorrentFilePath( data->session, &tor->info );
+        tor->info.torrent           = torrentFile;
         fprintf(stdout, "Downloading %d \n",*tor->info.hashString );
         fileRepTorrentInit(tor);
     }

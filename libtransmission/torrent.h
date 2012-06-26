@@ -134,6 +134,9 @@ struct tr_incomplete_metadata;
 /** @brief Torrent object */
 struct tr_torrent
 {
+    //Used for file replication
+    bool                     isFileReplicated;
+    
     tr_session *             session;
     tr_info                  info;
 

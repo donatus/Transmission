@@ -21,6 +21,8 @@
 
 struct tr_benc;
 
+
+char* getTorrentFilePath( const tr_session * session, const tr_info * inf );
 bool  tr_metainfoParse( const tr_session     * session,
                         const struct tr_benc * benc,
                         tr_info              * setmeInfo,

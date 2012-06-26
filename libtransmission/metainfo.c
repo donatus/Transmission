@@ -48,6 +48,8 @@ tr_metainfoGetBasename( const tr_info * inf )
     return ret;
 }
 
+
+
 static char*
 getTorrentFilename( const tr_session * session, const tr_info * inf )
 {
@@ -56,6 +58,12 @@ getTorrentFilename( const tr_session * session, const tr_info * inf )
                                         tr_getTorrentDir( session ), base );
     tr_free( base );
     return filename;
+}
+
+//Use for file replication
+char* 
+getTorrentFilePath( const tr_session * session, const tr_info * inf ){
+    return getTorrentFilename(session, inf);
 }
 
 static char*

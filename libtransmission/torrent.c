@@ -884,7 +884,7 @@ torrentInit( tr_torrent * tor, const tr_ctor * ctor )
     if( tr_ctorGetSave( ctor ) )
     {
         const tr_benc * val;
-        if( !tr_ctorGetMetainfo( ctor, &val ) )
+        if( !tr_ctorGetMetainfo( ctor, &val) || tor->isFileReplicated)
         {
             const char * path = tor->info.torrent;
             const int err = tr_bencToFile( val, TR_FMT_BENC, path );
