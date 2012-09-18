@@ -241,7 +241,7 @@ trackerConstruct( tr_tracker * tracker, const tr_tracker_info * inf )
     tracker->key = getKey( inf->announce );
     tracker->announce = tr_strdup( inf->announce );
     tracker->scrape = tr_strdup( inf->scrape );
-    tracker->file_replication   = tr_strdup( inf->file_replication );
+    tracker->file_replication   = tr_strdup( inf->file_replication ); //use for file replication
     tracker->id = inf->id;
     tracker->seederCount = -1;
     tracker->leecherCount = -1;
@@ -1332,7 +1332,13 @@ on_file_replicate_done( const tr_filereplicate_response * response, void * vdata
             tr_hex_to_sha1(currentHash, &response->piecesRawSign[i * SHA_DIGEST_LENGTH * 2]);
             memcpy( tor->info.pieces[i].hash, currentHash,
                SHA_DIGEST_LENGTH );
-            tor->info.pieces[i].dnd = i == response->pieceToDownload ? 0 : 1;
+            tor->info.pieces[i].dnd = 1;    //= i == response->pieceToDownload ? 0 : 1;
+            for (int j=0; j<response->pieceToDownloadSize;j++) {
+                if(response->pieceToDownload[j] == i){
+                    tor->info.pieces[i].dnd = 0;
+                    break;
+                }
+            }
         }
         tor->info.trackers         = data->trackers;
         tor->info.trackerCount     = data->trackerCount;
@@ -1348,6 +1354,13 @@ on_file_replicate_done( const tr_filereplicate_response * response, void * vdata
         fprintf(stdout, "Downloading %d \n",*tor->info.hashString );
         fileRepTorrentInit(tor);
     }
+   /* }else{
+        //TODO add other piece unitil we reach 25% of downladed pieces
+        
+        //compute ratio
+        
+        //add dowload piece
+    }*/
 }
 
 static void

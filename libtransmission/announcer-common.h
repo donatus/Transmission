@@ -164,7 +164,8 @@ typedef struct
     /* Torrent info */
     uint32_t            pieceSize;
     tr_piece_index_t    pieceCount;
-    uint32_t            pieceToDownload;
+    uint64_t*           pieceToDownload;
+    int                 pieceToDownloadSize;
     
     /* total size of the torrent, in bytes */
     uint64_t            totalSize;

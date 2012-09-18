@@ -530,7 +530,11 @@ on_file_replication_done( tr_session   * session,
         int64_t         pieceSize;
         int64_t         pieceCount;
         int64_t         totalSize;
-        int64_t         pieceToDownload;
+        int64_t         pieceToDownloadSize;
+        uint64_t*       pieceToDownload;
+        uint64_t        tmpPieceIndex;
+        tr_benc *       pieceList = NULL;
+        
         const char *    piecesRawSign;
         
         const int benc_loaded = !tr_bencLoad( msg, msglen, &top, NULL );
@@ -570,8 +574,21 @@ on_file_replication_done( tr_session   * session,
                 response->totalSize    = totalSize;
             }
             
-            if( tr_bencDictFindInt( &top, "p_down", &pieceToDownload ) ){
+            if( tr_bencDictFindInt(&top, "p_count", &pieceToDownloadSize)){
+                response->pieceToDownloadSize    = pieceToDownloadSize;
+            }
+            
+            if( tr_bencDictFindList( &top, "p_down", &pieceList )){
+                pieceToDownload     = tr_new(uint64_t, (int)pieceToDownloadSize);
+                
+                for(int i=0; i<pieceToDownloadSize; ++i ){
+                    if( tr_bencGetInt( tr_bencListChild( pieceList, i ), &tmpPieceIndex )){
+                        pieceToDownload[i-1] = tmpPieceIndex;
+                    }
+                }
                 response->pieceToDownload    = pieceToDownload;
+                
+                tr_bencFree(pieceList);
             }
             
             if( tr_bencDictFindStr( &top, "raw_pieces", &piecesRawSign ) ){
